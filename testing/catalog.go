@@ -5,12 +5,13 @@ package testing
 
 import (
 	batchv1 "k8s.io/api/batch/v1"
-	batchv1b1 "k8s.io/api/batch/v1beta1"
+	// batchv1b1 "k8s.io/api/batch/v1beta1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	qjv1a1 "code.cloudfoundry.org/quarks-job/pkg/kube/apis/quarksjob/v1alpha1"
 	"code.cloudfoundry.org/quarks-utils/pkg/pointers"
+
+	qjv1a1 "code.cloudfoundry.org/quarks-job/pkg/kube/apis/quarksjob/v1alpha1"
 )
 
 // Catalog provides several instances for tests
@@ -74,9 +75,9 @@ func (c *Catalog) DefaultPod(name, namespace string) corev1.Pod {
 }
 
 // ConfigJobTemplate returns the spec with a given command for busybox
-func (c *Catalog) ConfigJobTemplate() batchv1b1.JobTemplateSpec {
+func (c *Catalog) ConfigJobTemplate() batchv1.JobTemplateSpec {
 	one := int64(1)
-	return batchv1b1.JobTemplateSpec{
+	return batchv1.JobTemplateSpec{
 		Spec: batchv1.JobSpec{
 			Template: corev1.PodTemplateSpec{
 				ObjectMeta: metav1.ObjectMeta{
@@ -124,8 +125,8 @@ func (c *Catalog) ConfigJobTemplate() batchv1b1.JobTemplateSpec {
 }
 
 // QuarksJobPodTemplate returns the spec with a given output-persist container
-func (c *Catalog) QuarksJobPodTemplate(cmd []string) batchv1b1.JobTemplateSpec {
-	return batchv1b1.JobTemplateSpec{
+func (c *Catalog) QuarksJobPodTemplate(cmd []string) batchv1.JobTemplateSpec {
+	return batchv1.JobTemplateSpec{
 		Spec: batchv1.JobSpec{
 			Template: corev1.PodTemplateSpec{
 				Spec: corev1.PodSpec{
@@ -150,8 +151,8 @@ func (c *Catalog) QuarksJobPodTemplate(cmd []string) batchv1b1.JobTemplateSpec {
 }
 
 // FailingMultiContainerJobTemplate returns a spec with a given command for busybox and a second container which fails
-func (c *Catalog) FailingMultiContainerJobTemplate(cmd []string) batchv1b1.JobTemplateSpec {
-	return batchv1b1.JobTemplateSpec{
+func (c *Catalog) FailingMultiContainerJobTemplate(cmd []string) batchv1.JobTemplateSpec {
+	return batchv1.JobTemplateSpec{
 		Spec: batchv1.JobSpec{
 			Template: corev1.PodTemplateSpec{
 				Spec: corev1.PodSpec{
@@ -176,8 +177,8 @@ func (c *Catalog) FailingMultiContainerJobTemplate(cmd []string) batchv1b1.JobTe
 }
 
 // CmdJobTemplate returns the job spec with a given command for busybox
-func (c *Catalog) CmdJobTemplate(cmd []string) batchv1b1.JobTemplateSpec {
-	return batchv1b1.JobTemplateSpec{
+func (c *Catalog) CmdJobTemplate(cmd []string) batchv1.JobTemplateSpec {
+	return batchv1.JobTemplateSpec{
 		Spec: batchv1.JobSpec{
 			Template: corev1.PodTemplateSpec{
 				Spec: corev1.PodSpec{

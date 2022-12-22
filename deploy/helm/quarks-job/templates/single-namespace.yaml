@@ -17,6 +17,18 @@ kind: ServiceAccount
 metadata:
   name: "{{ .Values.persistOutputClusterRole.name }}"
   namespace: "{{ .Values.global.singleNamespace.name }}"
+secrets:
+  - name: "{{ .Values.persistOutputClusterRole.name }}-token-secret"
+
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: "{{ .Values.persistOutputClusterRole.name }}-token-secret"
+  namespace: "{{ .Values.global.singleNamespace.name }}"
+  annotations:
+    kubernetes.io/service-account.name: "{{ .Values.persistOutputClusterRole.name }}"
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
